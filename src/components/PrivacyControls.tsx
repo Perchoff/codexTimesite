@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
-import { Phone } from "lucide-react";
+import { ArrowUp, Phone } from "lucide-react";
 import { contacts } from "@/data/contacts";
 
 type Consent = "all" | "necessary";
@@ -20,11 +20,53 @@ export function CookieSettingsButton() {
 
 export function PrivacyControls() {
   const [visible, setVisible] = useState(false);
+  const [showBackToTop, setShowBackToTop] = useState(false);
+  const [backToTopOverFooter, setBackToTopOverFooter] = useState(false);
   const [storageFailed, setStorageFailed] = useState(false);
   const bannerRef = useRef<HTMLElement>(null);
+  const backToTopRef = useRef<HTMLAnchorElement>(null);
   const acceptRef = useRef<HTMLButtonElement>(null);
   const previousFocus = useRef<HTMLElement | null>(null);
   const reopened = useRef(false);
+  useEffect(() => {
+    const update = () => setShowBackToTop(window.scrollY > 400);
+    const frame = window.requestAnimationFrame(update);
+    window.addEventListener("scroll", update, { passive: true });
+    return () => {
+      window.cancelAnimationFrame(frame);
+      window.removeEventListener("scroll", update);
+    };
+  }, []);
+  useEffect(() => {
+    const button = backToTopRef.current;
+    const footer = document.querySelector(".footer");
+    if (!button || !footer) return;
+    let frame = 0;
+    const update = () => {
+      window.cancelAnimationFrame(frame);
+      frame = window.requestAnimationFrame(() => {
+        const buttonRect = button.getBoundingClientRect();
+        const footerRect = footer.getBoundingClientRect();
+        setBackToTopOverFooter(
+          buttonRect.bottom > footerRect.top &&
+            buttonRect.top < footerRect.bottom,
+        );
+      });
+    };
+    const observer = new ResizeObserver(update);
+    observer.observe(footer);
+    observer.observe(button);
+    if (bannerRef.current) observer.observe(bannerRef.current);
+    window.addEventListener("scroll", update, { passive: true });
+    window.addEventListener("resize", update);
+    update();
+    return () => {
+      window.cancelAnimationFrame(frame);
+      observer.disconnect();
+      window.removeEventListener("scroll", update);
+      window.removeEventListener("resize", update);
+    };
+  }, [showBackToTop, visible]);
   useEffect(() => {
     let stored: string | null = null;
     try {
@@ -91,11 +133,22 @@ export function PrivacyControls() {
     <>
       <a
         href={contacts.phoneHref}
-        className="floating-call"
+        className="floating-action floating-call"
         aria-label="Позвонить в студию Время маникюра"
       >
         <Phone size={22} strokeWidth={1.7} />
       </a>
+      {showBackToTop && (
+        <a
+          ref={backToTopRef}
+          href="#main"
+          className={`floating-action floating-top${backToTopOverFooter ? " is-over-footer" : ""}`}
+          aria-label="Вернуться наверх"
+          title="Наверх"
+        >
+          <ArrowUp size={20} strokeWidth={1.7} aria-hidden="true" />
+        </a>
+      )}
       {visible && (
         <section
           ref={bannerRef}

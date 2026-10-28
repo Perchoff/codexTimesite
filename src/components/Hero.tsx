@@ -35,9 +35,7 @@ export function Hero() {
         className="hero-art"
         aria-label="Фирменный знак студии — рука с часами"
       >
-        <div className="art-arch">
-          <span className="art-ring ring-one" />
-          <span className="art-ring ring-two" />
+        <div className="art-stage">
           <span className="art-topline">
             УХОД &nbsp; / &nbsp; СТИЛЬ &nbsp; / &nbsp; ГАРМОНИЯ
           </span>

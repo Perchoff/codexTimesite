@@ -350,45 +350,21 @@ svg {
   padding: 0 16px 36px 0;
   align-self: center;
 }
-.art-arch {
+.art-stage {
   isolation: isolate;
   position: relative;
   height: 558px;
   overflow: hidden;
-  border-radius: 48% 48% 3px 3px;
-  background: radial-gradient(
-    ellipse at 44% 31%,
-    #f2e9dc 0,
-    #e5d6c2 58%,
-    #d4bfa4 100%
-  );
   display: flex;
   align-items: center;
   justify-content: center;
 }
-.art-arch::before {
-  content: "";
-  position: absolute;
-  inset: 16px;
-  border: 1px solid #b99b764f;
-  border-radius: 48% 48% 0 0;
-  z-index: -1;
-}
-.art-arch::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  height: 24%;
-  background: linear-gradient(transparent, #b19a7970);
-  z-index: -1;
-}
 .art-topline {
+  font-weight: 600;
   position: absolute;
   top: 67px;
-  font-size: 10px;
-  color: #7e654c;
+  font-size: 12px;
+  color: #6b4d36;
   letter-spacing: 0.26em;
 }
 .logo-plinth {
@@ -418,12 +394,35 @@ svg {
   filter: saturate(0.58) brightness(1.09);
   transform: rotate(-7deg);
 }
+.coin-light,
 .clock-face {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
   pointer-events: none;
+}
+.coin-light {
+  mask-image: radial-gradient(
+    circle closest-side at 50% 49.78%,
+    transparent 86%,
+    #000 90%,
+    #000 95%,
+    transparent 98%
+  );
+}
+.coin-light-pulse {
+  width: 100%;
+  animation: coin-glow 4s ease-in-out infinite;
+}
+@keyframes coin-glow {
+  0%,
+  100% {
+    filter: brightness(0.75);
+  }
+  50% {
+    filter: brightness(1.4);
+  }
 }
 .clock-hand {
   transform-origin: 489px 376px;
@@ -438,27 +437,12 @@ svg {
   transform: rotate(var(--second-angle, 180deg));
 }
 .art-bottomline {
+  font-weight: 600;
   position: absolute;
-  bottom: 35px;
-  font-size: 10px;
+  bottom: 8px;
+  font-size: 12px;
   letter-spacing: 0.3em;
-  color: #70573e;
-}
-.art-ring {
-  width: 600px;
-  height: 600px;
-  border: 1px solid #a77a4a20;
-  border-radius: 50%;
-  position: absolute;
-  z-index: -1;
-}
-.ring-one {
-  top: -60px;
-  left: -170px;
-}
-.ring-two {
-  top: -30px;
-  left: -140px;
+  color: #6b4d36;
 }
 .art-note {
   position: absolute;
@@ -477,6 +461,8 @@ svg {
   color: var(--bronze);
 }
 .art-note span {
+  font-weight: 500;
+  color: #4f3e30;
   font-family: "Cormorant Garamond Variable", Georgia, serif;
   font-size: 22px;
   line-height: 1.15;
@@ -485,13 +471,16 @@ svg {
   color: #8a715a;
 }
 .art-caption {
+  font-weight: 600;
+  white-space: nowrap;
   position: absolute;
   right: -10px;
-  top: 58%;
+  top: 50%;
+  transform: translateY(-50%);
   writing-mode: vertical-rl;
-  font-size: 9px;
+  font-size: 11px;
   letter-spacing: 0.26em;
-  color: #8a7967;
+  color: #6b4d36;
 }
 .hero-foot {
   grid-column: 1 / -1;
@@ -896,46 +885,72 @@ svg {
   opacity: 1;
 }
 .footer {
+  --footer-credits-width: 284px;
   background: #3b3027;
   color: #f2e9dc;
-  padding-block: 24px 16px;
+  padding-block: 12px 8px;
 }
 .footer-top {
   display: flex;
   flex-wrap: wrap;
-  gap: 40px;
+  gap: 20px;
   align-items: center;
   justify-content: space-between;
-  padding-bottom: 18px;
+  padding-bottom: 8px;
 }
 .brand-footer .brand-mark {
+  width: 44px;
+  height: 44px;
   opacity: 0.8;
 }
 .brand-footer .brand-wordmark {
   font-size: 26px;
 }
 .footer-top > p {
+  width: var(--footer-credits-width);
+  margin-left: auto;
+  margin-right: 56px;
+  text-align: right;
   font-size: var(--text-secondary);
-  line-height: 1.9;
+  line-height: 1.45;
 }
 .footer-top > p > span {
   color: #c1b3a2;
   font-size: var(--text-secondary);
 }
-.footer-slogan {
-  font-size: 26px;
-  font-style: italic;
-  font-family: "Cormorant Garamond Variable", Georgia, serif;
-  line-height: 1.2;
+.footer-developers {
+  display: flex;
+  flex: 0 0 auto;
+  flex-wrap: wrap;
+  max-width: 100%;
+  width: var(--footer-credits-width);
+  margin-left: auto;
+  margin-right: 56px;
+  align-items: baseline;
+  gap: 2px 8px;
+  font-size: 11px;
+  line-height: 1.6;
+}
+.footer-developers > span {
+  color: #c1b3a2;
+}
+.footer-developers a {
+  padding-block: 3px;
+  text-underline-offset: 4px;
+}
+.footer-developers a:hover,
+.footer-developers a:focus-visible {
+  color: #fff5e7;
+  text-decoration: underline;
 }
 .footer-bottom {
   border-top: 1px solid #ffffff21;
-  padding-top: 12px;
+  padding-top: 6px;
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
-  gap: 24px;
+  gap: 8px 16px;
   font-size: var(--text-secondary);
   color: #c9bdaf;
 }
@@ -947,7 +962,7 @@ svg {
 .footer-link {
   border: 0;
   background: none;
-  padding: 8px 0;
+  padding: 3px 0;
   color: inherit;
   font-size: inherit;
 }
@@ -957,11 +972,12 @@ svg {
   text-decoration: underline;
   text-underline-offset: 4px;
 }
-.floating-call {
+.floating-action {
   position: fixed;
   z-index: 45;
   bottom: calc(24px + env(safe-area-inset-bottom, 0px) + var(--cookie-height));
-  right: 25px;
+  border: 0;
+  padding: 0;
   width: 56px;
   height: 56px;
   display: flex;
@@ -973,11 +989,60 @@ svg {
   box-shadow: 0 4px 18px #332a2430;
   transition:
     transform 0.2s,
-    background 0.2s;
+    background 0.2s,
+    color 0.2s,
+    border-color 0.2s;
 }
-.floating-call:hover {
+.floating-call {
+  right: 25px;
+}
+.floating-top {
+  left: 25px;
+  width: 46px;
+  height: 46px;
+  border: 1px solid var(--bronze);
+  background: var(--background);
+  color: var(--bronze);
+  box-shadow: 0 3px 12px #332a2418;
+}
+.floating-call::after {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border: 2px solid #a77a4a;
+  border-radius: inherit;
+  pointer-events: none;
+  animation: call-pulse 2.8s ease-out infinite;
+}
+@keyframes call-pulse {
+  0% {
+    transform: scale(1);
+    opacity: 0.65;
+  }
+  75%,
+  100% {
+    transform: scale(1.5);
+    opacity: 0;
+  }
+}
+.floating-action:hover,
+.floating-action:focus-visible {
   transform: translateY(-3px);
   background: #4b3426;
+}
+.floating-top:hover,
+.floating-top:focus-visible {
+  background: #efe4d6;
+}
+.floating-top.is-over-footer {
+  background: #765336;
+  border-color: #765336;
+  color: #fffaf4;
+}
+.floating-top.is-over-footer:hover,
+.floating-top.is-over-footer:focus-visible {
+  background: #4b3426;
+  border-color: #4b3426;
 }
 .cookie-banner {
   position: fixed;
@@ -1155,7 +1220,7 @@ svg {
   .hero h1 {
     font-size: 134px;
   }
-  .art-arch {
+  .art-stage {
     height: 635px;
   }
   .logo-plinth {
@@ -1184,12 +1249,12 @@ svg {
   .hero h1 {
     font-size: 86px;
   }
-  .art-arch {
+  .art-stage {
     height: 490px;
   }
   .art-topline {
     top: 59px;
-    font-size: 10px;
+    font-size: 12px;
   }
   .art-note {
     left: -20px;
@@ -1291,11 +1356,11 @@ svg {
     font-size: var(--text-control);
     gap: 6px;
   }
-  .art-arch {
+  .art-stage {
     height: 430px;
   }
   .art-topline {
-    font-size: 10px;
+    font-size: 12px;
   }
   .art-note {
     padding: 14px;
@@ -1375,15 +1440,12 @@ svg {
     font-size: 29px;
   }
   .footer-top {
-    gap: 25px;
+    gap: 12px;
     flex-wrap: wrap;
-  }
-  .footer-slogan {
-    font-size: 24px;
   }
   .footer-bottom {
     flex-wrap: wrap;
-    gap: 10px 20px;
+    gap: 6px 16px;
   }
 }
 @media (max-width: 767px) {
@@ -1505,26 +1567,22 @@ svg {
     margin: 34px auto 0;
     width: min(100%, 430px);
   }
-  .art-arch {
+  .art-stage {
     height: auto;
     aspect-ratio: 0.96;
-    border-radius: 49% 49% 3px 3px;
   }
   .art-topline {
     top: 44px;
-    font-size: 10px;
+    font-size: 12px;
   }
   .logo-plinth {
     width: 75%;
     margin-top: 26px;
   }
   .art-bottomline {
-    bottom: 23px;
-    font-size: 10px;
+    bottom: 4px;
+    font-size: 12px;
     letter-spacing: 0.24em;
-  }
-  .art-arch::before {
-    inset: 12px;
   }
   .art-note {
     bottom: 44px;
@@ -1540,8 +1598,7 @@ svg {
   }
   .art-caption {
     right: -3px;
-    font-size: 9px;
-    top: 52%;
+    font-size: 11px;
   }
   .hero-foot {
     margin-top: 12px;
@@ -1764,14 +1821,14 @@ svg {
     font-size: 32px;
   }
   .footer {
-    padding-top: 22px;
-    padding-bottom: 24px;
+    padding-top: 14px;
+    padding-bottom: 12px;
   }
   .footer-top {
     flex-direction: column;
     align-items: flex-start;
-    gap: 14px;
-    padding-bottom: 16px;
+    gap: 8px;
+    padding-bottom: 8px;
   }
   .brand-footer .brand-mark {
     width: 42px;
@@ -1783,33 +1840,48 @@ svg {
   .footer-top > p {
     display: none;
   }
-  .footer-slogan {
-    font-size: 27px;
-  }
   .footer-bottom {
     align-items: flex-start;
     flex-direction: column;
-    padding-top: 12px;
-    gap: 9px;
+    padding-top: 6px;
+    gap: 4px;
     font-size: var(--text-secondary);
   }
   .footer-bottom > div {
     flex-direction: column;
-    gap: 3px;
+    gap: 0;
   }
   .footer-bottom > div > a {
-    padding-block: 6px;
+    padding-block: 3px;
+  }
+  .footer-developers {
+    width: auto;
+    margin-left: 0;
+    margin-right: 0;
+    padding-bottom: 48px;
+  }
+  .footer-developers > span {
+    flex-basis: 100%;
   }
   .footer-link {
     align-self: flex-start;
   }
   .floating-call {
     right: 18px;
+  }
+  .floating-top {
+    left: 18px;
+  }
+  .floating-action {
     bottom: calc(
       18px + env(safe-area-inset-bottom, 0px) + var(--cookie-height)
     );
     width: 54px;
     height: 54px;
+  }
+  .floating-top {
+    width: 44px;
+    height: 44px;
   }
   .cookie-banner {
     left: 12px;
@@ -1902,6 +1974,14 @@ svg {
   }
 }
 @media (prefers-reduced-motion: reduce) {
+  .coin-light-pulse {
+    animation: none;
+    filter: none;
+  }
+  .floating-call::after {
+    animation: none;
+    opacity: 0;
+  }
   html {
     scroll-behavior: auto;
   }

@@ -59,6 +59,17 @@ export function AnimatedLogo() {
         preload
         sizes="(max-width: 767px) 75vw, 450px"
       />
+      {/* Brighten only the existing illuminated rim in the original artwork. */}
+      <div className="coin-light" aria-hidden="true">
+        <Image
+          className="coin-light-pulse"
+          src="/logo/brand-mark.webp"
+          alt=""
+          width={912}
+          height={912}
+          sizes="(max-width: 767px) 75vw, 450px"
+        />
+      </div>
       <svg
         ref={dial}
         className="clock-face"

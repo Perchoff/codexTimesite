@@ -15,7 +15,7 @@ export function About() {
             />
           </div>
           <figcaption>
-            <span>01 / НАСТРОЕНИЕ ПРОСТРАНСТВА</span>
+            <span>НАСТРОЕНИЕ ПРОСТРАНСТВА</span>
           </figcaption>
         </figure>
         <div className="about-copy">

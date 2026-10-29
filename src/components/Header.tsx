@@ -46,14 +46,17 @@ export function Header() {
         <Brand />
         <nav className="desktop-nav" aria-label="Основная навигация">
           {links.map((link) => (
-            <a key={link.href} href={link.href}>
+            <a
+              key={link.href}
+              href={`${process.env.NEXT_PUBLIC_BASE_PATH || ""}${link.href}`}
+            >
               {link.label}
             </a>
           ))}
         </nav>
         <a
           className="button button-small header-booking"
-          href={`/${contacts.bookingUrl}`}
+          href={`${process.env.NEXT_PUBLIC_BASE_PATH || ""}/${contacts.bookingUrl}`}
         >
           Записаться <ArrowUpRight size={15} />
         </a>
@@ -75,12 +78,19 @@ export function Header() {
           aria-label="Мобильная навигация"
         >
           {links.map((link) => (
-            <a key={link.href} href={link.href} onClick={() => setOpen(false)}>
+            <a
+              key={link.href}
+              href={`${process.env.NEXT_PUBLIC_BASE_PATH || ""}${link.href}`}
+              onClick={() => setOpen(false)}
+            >
               {link.label}
               <ArrowUpRight size={18} />
             </a>
           ))}
-          <a href={`/${contacts.bookingUrl}`} onClick={() => setOpen(false)}>
+          <a
+            href={`${process.env.NEXT_PUBLIC_BASE_PATH || ""}/${contacts.bookingUrl}`}
+            onClick={() => setOpen(false)}
+          >
             Записаться <ArrowUpRight size={18} />
           </a>
         </nav>

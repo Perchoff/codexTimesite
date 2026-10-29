@@ -2,6 +2,7 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   poweredByHeader: false,
+  basePath: process.env.NEXT_PUBLIC_BASE_PATH || "",
   ...(process.env.STATIC_EXPORT === "1"
     ? {
         output: "export" as const,

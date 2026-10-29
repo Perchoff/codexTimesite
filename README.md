@@ -122,3 +122,10 @@ node scripts/prepare-assets.mjs
 ```
 
 Исходники должны оставаться в `Content` под текущими именами.
+
+
+## Тестовая публикация в GitHub Pages
+
+Workflow `.github/workflows/pages.yml` собирает статический сайт и публикует его после push в main. Владелец репозитория должен сначала выбрать Settings → Pages → Build and deployment → Source: GitHub Actions. Для приватного репозитория нужен тариф с поддержкой Pages. После включения запустите Actions → Publish GitHub Pages → Run workflow. Ожидаемый адрес: https://perchoff.github.io/codexTimesite/.
+
+Для Pages сборка использует NEXT_PUBLIC_BASE_PATH=/codexTimesite. Без этой переменной npm run build:static продолжает создавать архив для корня домена. Сборка тестовая: robots.txt запрещает индексацию; это не ограничение доступа.

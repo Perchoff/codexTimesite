@@ -9,6 +9,9 @@ import { PrivacyControls } from "@/components/PrivacyControls";
 import { siteConfig } from "@/data/siteConfig";
 
 export const metadata: Metadata = {
+  ...(process.env.STATIC_EXPORT === "1"
+    ? { robots: { index: false, follow: false } }
+    : {}),
   metadataBase: siteConfig.url ? new URL(siteConfig.url) : undefined,
   title: { default: siteConfig.title, template: "%s | Время маникюра" },
   description: siteConfig.description,
@@ -34,8 +37,13 @@ export const metadata: Metadata = {
   },
   twitter: { card: "summary_large_image" },
   icons: {
-    icon: [{ url: "/icon.png", type: "image/png" }],
-    apple: "/apple-icon.png",
+    icon: [
+      {
+        url: `${process.env.NEXT_PUBLIC_BASE_PATH || ""}/icon.png`,
+        type: "image/png",
+      },
+    ],
+    apple: `${process.env.NEXT_PUBLIC_BASE_PATH || ""}/apple-icon.png`,
   },
 };
 export default function RootLayout({

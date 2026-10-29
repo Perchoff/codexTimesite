@@ -27,7 +27,9 @@ export const siteConfig = {
   title: "Время маникюра — маникюр, педикюр и наращивание на Таганской",
   description:
     "Маникюр, педикюр, укрепление и наращивание ногтей в студии «Время маникюра». Москва, Таганская улица, 1/2, стр. 2. Запись по телефону.",
-  url: productionOrigin(process.env.NEXT_PUBLIC_SITE_URL),
+  url: productionOrigin(process.env.NEXT_PUBLIC_SITE_URL)
+    ? `${productionOrigin(process.env.NEXT_PUBLIC_SITE_URL)}${process.env.NEXT_PUBLIC_BASE_PATH || ""}`
+    : undefined,
   // Organization ID and coordinates verified from the customer's Yandex share link.
   mapEmbedUrl:
     mapEmbedUrl(process.env.NEXT_PUBLIC_YANDEX_MAP_EMBED_URL) ??

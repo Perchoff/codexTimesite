@@ -34,11 +34,10 @@ export function Advantages() {
           Больше, чем <em>маникюр</em>
         </h2>
         <div className="advantages-grid">
-          {items.map(({ icon: Icon, title, text }, i) => (
+          {items.map(({ icon: Icon, title, text }) => (
             <article key={title}>
               <div className="advantage-icon">
                 <Icon size={28} strokeWidth={1.2} />
-                <span>0{i + 1}</span>
               </div>
               <h3>{title}</h3>
               <p>{text}</p>

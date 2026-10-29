@@ -61,7 +61,6 @@ export function Services() {
               tabs.current[target]?.focus();
             }}
           >
-            <span className="tab-number">0{index + 1}</span>
             {item.name}
             <ArrowUpRight size={19} />
           </button>

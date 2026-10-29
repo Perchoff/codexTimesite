@@ -3,7 +3,7 @@ import { Hero } from "@/components/Hero";
 import { About } from "@/components/About";
 import { Services } from "@/components/Services";
 import { Advantages } from "@/components/Advantages";
-import { InteriorGallery } from "@/components/InteriorGallery";
+import { WorksGallery } from "@/components/WorksGallery";
 import { DiscountCardSection } from "@/components/DiscountCardSection";
 import { Contacts } from "@/components/Contacts";
 import { contacts } from "@/data/contacts";
@@ -42,7 +42,7 @@ export default function Home() {
       <About />
       <Services />
       <Advantages />
-      <InteriorGallery />
+      <WorksGallery />
       <DiscountCardSection />
       <Contacts />
     </main>

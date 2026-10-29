@@ -739,10 +739,6 @@ svg {
   color: var(--bronze);
   margin-bottom: 25px;
 }
-.advantage-icon span {
-  font-size: var(--text-label);
-  color: #8d7e6b;
-}
 .advantages-grid h3 {
   font-size: 27px;
   line-height: 1.1;
@@ -1991,5 +1987,42 @@ svg {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
+  }
+}
+
+/* More expressive typography on desktop; compact screens retain their scale. */
+@media (min-width: 1024px) {
+  :root {
+    --text-body: 18px;
+  }
+  h2 {
+    font-size: clamp(56px, 5vw, 72px);
+    font-weight: 500;
+    line-height: 1.05;
+  }
+  h2 em,
+  h1 em {
+    font-weight: 500;
+  }
+  .hero h1 {
+    font-weight: 500;
+  }
+  .hero-tagline {
+    font-weight: 500;
+  }
+  .advantages-grid h3 {
+    font-size: clamp(28px, 2.3vw, 32px);
+    font-weight: 500;
+    line-height: 1.15;
+  }
+  .about-copy .lead,
+  .service-intro h3 {
+    font-weight: 500;
+  }
+  .works-heading > p {
+    font-size: 16px;
+  }
+  .works-card figcaption {
+    font-size: 14px;
   }
 }

@@ -8,6 +8,7 @@ import { contacts } from "@/data/contacts";
 const links = [
   { href: "/#about", label: "О студии" },
   { href: "/#services", label: "Услуги" },
+  { href: "/#gallery", label: "Работы" },
   { href: "/#contacts", label: "Контакты" },
 ];
 

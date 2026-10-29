@@ -6,13 +6,15 @@ export function About() {
     <section id="about" className="about section-pad">
       <div className="container about-grid">
         <figure className="about-visual">
-          <div className="about-image">
-            <Image
-              src="/images/brand-concept.webp"
-              alt="Предоставленная заказчиком концепция вывески студии с фирменным логотипом"
-              fill
-              sizes="(max-width: 767px) 90vw, 50vw"
-            />
+          <div className="about-frame">
+            <div className="about-image">
+              <Image
+                src="/images/brand-concept.webp"
+                alt="Предоставленная заказчиком концепция вывески студии с фирменным логотипом"
+                fill
+                sizes="(max-width: 767px) 90vw, 50vw"
+              />
+            </div>
           </div>
           <figcaption>
             <span>НАСТРОЕНИЕ ПРОСТРАНСТВА</span>

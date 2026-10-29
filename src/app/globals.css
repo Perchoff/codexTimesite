@@ -531,13 +531,7 @@ svg {
   object-position: 48% center;
   filter: saturate(0.65) brightness(1.05);
 }
-.about-visual::before {
-  content: "";
-  position: absolute;
-  inset: -14px 20px 38px -14px;
-  border: 1px solid #cbb79b;
-  border-radius: 3px;
-}
+
 .about-visual figcaption {
   position: relative;
   display: flex;
@@ -1635,15 +1629,13 @@ svg {
     margin-top: 5px;
   }
   .about-visual {
-    margin-left: 10px;
+    margin-left: 0;
   }
   .about-image {
     height: auto;
     aspect-ratio: 1.15;
   }
-  .about-visual::before {
-    inset: -10px 15px 33px -10px;
-  }
+
   .about-visual figcaption {
     padding-top: 13px;
     font-size: var(--text-label);
@@ -1651,7 +1643,7 @@ svg {
   }
   .about-visual figcaption > span:first-child {
     font-size: var(--text-label);
-    max-width: 135px;
+    max-width: none;
   }
   .section-heading {
     flex-direction: column;
@@ -2024,5 +2016,19 @@ svg {
   }
   .works-card figcaption {
     font-size: 14px;
+  }
+}
+
+.about-frame {
+  padding: 10px;
+  border: 1px solid #cbb79b;
+  border-radius: 3px;
+}
+@media (max-width: 767px) {
+  .about-frame {
+    padding: 8px;
+  }
+  .about-visual figcaption {
+    padding-top: 16px;
   }
 }

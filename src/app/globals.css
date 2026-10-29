@@ -522,13 +522,14 @@ svg {
 }
 .about-image {
   position: relative;
-  height: 410px;
+  height: auto;
   overflow: hidden;
   border-radius: 3px;
+  aspect-ratio: 16 / 9;
 }
 .about-image img {
-  object-fit: cover;
-  object-position: 48% center;
+  object-fit: contain;
+  object-position: center;
   filter: saturate(0.65) brightness(1.05);
 }
 
@@ -1263,7 +1264,8 @@ svg {
     gap: 60px;
   }
   .about-image {
-    height: 390px;
+    height: auto;
+    aspect-ratio: 16 / 9;
   }
   .service-panel {
     grid-template-columns: 240px 1fr;
@@ -1367,7 +1369,8 @@ svg {
     gap: 35px;
   }
   .about-image {
-    height: 380px;
+    height: auto;
+    aspect-ratio: 16 / 9;
   }
   .about-visual figcaption {
     flex-direction: column;
@@ -1633,7 +1636,7 @@ svg {
   }
   .about-image {
     height: auto;
-    aspect-ratio: 1.15;
+    aspect-ratio: 16 / 9;
   }
 
   .about-visual figcaption {

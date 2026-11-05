@@ -133,7 +133,7 @@ export function PrivacyControls() {
     <>
       <a
         href={contacts.phoneHref}
-        className="floating-action floating-call"
+        className={`floating-action floating-call${backToTopOverFooter ? " is-over-footer" : ""}`}
         aria-label="Позвонить в студию Время маникюра"
       >
         <Phone size={22} strokeWidth={1.7} />

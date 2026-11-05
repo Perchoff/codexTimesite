@@ -2068,7 +2068,7 @@ svg {
     height: 14px;
   }
   .footer {
-    padding-block: 28px 48px;
+    padding-block: 28px 16px;
   }
   .footer-top {
     padding-bottom: 22px;
@@ -2109,5 +2109,12 @@ svg {
     border-top: 1px solid #ffffff21;
     font-size: 12px;
     gap: 8px 16px;
+  }
+}
+
+@media (max-width: 767px) {
+  .floating-action.is-over-footer {
+    visibility: hidden;
+    pointer-events: none;
   }
 }

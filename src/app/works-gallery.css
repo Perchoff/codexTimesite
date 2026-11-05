@@ -221,3 +221,16 @@
     transition: none;
   }
 }
+
+.works-more {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-top: 22px;
+}
+.works-more p {
+  color: var(--muted);
+  font-size: 13px;
+}

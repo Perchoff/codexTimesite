@@ -17,16 +17,18 @@ const categories = [
 export function WorksGallery() {
   const [category, setCategory] = useState(categories[0]);
   const [active, setActive] = useState(0);
+  const [expanded, setExpanded] = useState(false);
   const [selected, setSelected] = useState(0);
   const [viewerOpen, setViewerOpen] = useState(false);
   const [atEnd, setAtEnd] = useState(false);
   const track = useRef<HTMLDivElement>(null);
   const dialog = useRef<HTMLDialogElement>(null);
   const previousOverflow = useRef("");
-  const photos =
+  const filteredPhotos =
     category === categories[0]
       ? works
       : works.filter((photo) => photo.category === category);
+  const photos = expanded ? filteredPhotos : filteredPhotos.slice(0, 12);
   const photo = photos[selected] ?? photos[0];
   useEffect(() => {
     const element = track.current;
@@ -42,7 +44,7 @@ export function WorksGallery() {
       observer.disconnect();
       element.removeEventListener("scroll", update);
     };
-  }, [category]);
+  }, [category, photos.length]);
 
   function move(direction: number) {
     const next = Math.max(0, Math.min(photos.length - 1, active + direction));
@@ -91,6 +93,7 @@ export function WorksGallery() {
             aria-pressed={category === item}
             onClick={() => {
               setCategory(item);
+              setExpanded(false);
               setActive(0);
               setSelected(0);
               if (track.current) track.current.scrollLeft = 0;
@@ -155,6 +158,20 @@ export function WorksGallery() {
           </figure>
         ))}
       </div>
+      {!expanded && filteredPhotos.length > 12 && (
+        <div className="works-more">
+          <p>
+            В подборке {photos.length} из {filteredPhotos.length} работ
+          </p>
+          <button
+            type="button"
+            className="text-link"
+            onClick={() => setExpanded(true)}
+          >
+            Показать все работы ({filteredPhotos.length})
+          </button>
+        </div>
+      )}
       <div className="works-bottom">
         <p>Листайте и нажимайте на фото, чтобы рассмотреть детали</p>
         <div className="works-arrows">

@@ -1,5 +1,34 @@
 export const works = [
   {
+    src: "/images/works/work-30.webp",
+    alt: "Светлый маникюр с графичными синими линиями",
+    category: "Маникюр с покрытием",
+    width: 1024,
+    height: 1280,
+  },
+  {
+    src: "/images/works/work-31.webp",
+    alt: "Красно-белый маникюр с цветочным дизайном",
+    category: "Маникюр с покрытием",
+    width: 1080,
+    height: 1080,
+  },
+  {
+    src: "/images/works/work-32.webp",
+    alt: "Молочный маникюр с плавным переходом оттенка",
+    category: "Маникюр с покрытием",
+    width: 1080,
+    height: 1080,
+  },
+  {
+    src: "/images/works/work-33.webp",
+    alt: "Яркий градиентный маникюр с контрастными акцентами",
+    category: "Маникюр с покрытием",
+    width: 1080,
+    height: 1080,
+  },
+
+  {
     src: "/images/works/work-03.webp",
     alt: "Нюдовый маникюр миндальной формы",
     category: "Маникюр с покрытием",

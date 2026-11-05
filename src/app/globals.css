@@ -1865,7 +1865,7 @@ svg {
   }
   .floating-action {
     bottom: calc(
-      82px + env(safe-area-inset-bottom, 0px) + var(--cookie-height)
+      18px + env(safe-area-inset-bottom, 0px) + var(--cookie-height)
     );
     width: 54px;
     height: 54px;

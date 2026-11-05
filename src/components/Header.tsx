@@ -9,6 +9,7 @@ const links = [
   { href: "/#about", label: "О студии" },
   { href: "/#services", label: "Услуги" },
   { href: "/#gallery", label: "Работы" },
+  { href: "/#team", label: "Мастера" },
   { href: "/#contacts", label: "Контакты" },
 ];
 

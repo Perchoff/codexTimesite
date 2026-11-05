@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Hero } from "@/components/Hero";
 import { About } from "@/components/About";
+import { Team } from "@/components/Team";
+import "./team.css";
 import { Services } from "@/components/Services";
 import { Advantages } from "@/components/Advantages";
 import { WorksGallery } from "@/components/WorksGallery";
@@ -43,6 +45,7 @@ export default function Home() {
       <Services />
       <Advantages />
       <WorksGallery />
+      <Team />
       <DiscountCardSection />
       <Contacts />
     </main>

@@ -1,0 +1,101 @@
+.team {
+  background: var(--paper);
+}
+.team-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 40px;
+  margin-top: 42px;
+}
+.team-card {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+.team-portrait {
+  position: relative;
+  aspect-ratio: 1;
+  overflow: hidden;
+  border-radius: 3px;
+}
+.team-portrait img {
+  object-fit: cover;
+  object-position: center 35%;
+}
+.team-experience {
+  position: absolute;
+  left: 18px;
+  bottom: 18px;
+  padding: 8px 14px;
+  background: #f7f3edf2;
+  color: var(--ink);
+  font-size: 12px;
+  border-radius: 2px;
+}
+.team-info {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  padding-top: 25px;
+}
+.team-role {
+  color: var(--bronze);
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+.team-info h3 {
+  font-size: clamp(32px, 3vw, 44px);
+  line-height: 1.1;
+  font-weight: 500;
+}
+.team-intro {
+  margin-top: 12px;
+  color: var(--muted);
+  font-size: 15px;
+}
+.team-info ul {
+  padding-left: 19px;
+  margin: 22px 0 26px;
+  font-size: 14px;
+  line-height: 1.75;
+}
+.team-info li {
+  padding-left: 4px;
+  margin-bottom: 9px;
+}
+.team-info li::marker {
+  color: var(--bronze);
+}
+.team-info .text-link {
+  align-self: flex-start;
+  margin-top: auto;
+}
+@media (min-width: 768px) {
+  .desktop-nav {
+    gap: clamp(12px, 1.7vw, 26px);
+  }
+}
+@media (max-width: 767px) {
+  .team-grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 40px;
+    margin-top: 28px;
+  }
+  .team-info {
+    padding-top: 21px;
+  }
+  .team-info h3 {
+    font-size: 34px;
+  }
+  .team-experience {
+    left: 12px;
+    bottom: 12px;
+    padding: 7px 11px;
+    font-size: 11px;
+  }
+  .team-info ul {
+    margin-block: 18px 22px;
+  }
+}

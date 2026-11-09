@@ -745,6 +745,38 @@ svg {
   line-height: 1.8;
   max-width: 215px;
 }
+.reviews {
+  background: var(--paper);
+}
+.reviews-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(300px, 1.25fr);
+  gap: clamp(24px, 5vw, 80px);
+  align-items: center;
+}
+.reviews-intro {
+  max-width: 34ch;
+  color: var(--muted);
+  margin-block: 20px 24px;
+}
+.reviews-frame {
+  display: block;
+  width: 100%;
+  max-width: 760px;
+  height: 540px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--background);
+}
+@media (max-width: 767px) {
+  .reviews-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .reviews-frame {
+    width: max(300px, 100%);
+    justify-self: center;
+  }
+}
 .contacts {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -790,6 +822,11 @@ svg {
   font-family: "Cormorant Garamond Variable", Georgia, serif;
   font-size: 32px;
   line-height: 1.15;
+}
+.contact-socials {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
 }
 .contact-actions {
   display: grid;

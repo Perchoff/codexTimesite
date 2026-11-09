@@ -7,5 +7,13 @@ export const contacts = {
   details: "Помещение 1П, 2 этаж",
   address: "Москва, Таганская улица, 1/2, строение 2, помещение 1П, 2 этаж",
   mapUrl: "https://yandex.ru/maps/-/CXVJMDL3",
+  reviewsUrl:
+    "https://yandex.ru/maps/org/vremya_manikyura/216353023162/reviews/",
+  reviewsWidgetUrl:
+    "https://yandex.ru/maps-reviews-widget/216353023162?comments",
+  socials: [
+    { label: "Telegram", href: "https://t.me/+79269942552" },
+    { label: "WhatsApp", href: "https://wa.me/79269942552" },
+  ],
   bookingUrl: "#contacts",
 };

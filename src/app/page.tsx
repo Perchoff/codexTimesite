@@ -8,6 +8,7 @@ import { Advantages } from "@/components/Advantages";
 import { WorksGallery } from "@/components/WorksGallery";
 import { DiscountCardSection } from "@/components/DiscountCardSection";
 import { Contacts } from "@/components/Contacts";
+import { Reviews } from "@/components/Reviews";
 import { contacts } from "@/data/contacts";
 import { siteConfig } from "@/data/siteConfig";
 
@@ -28,6 +29,7 @@ export default function Home() {
       addressCountry: "RU",
     },
     hasMap: contacts.mapUrl,
+    sameAs: contacts.socials.map(({ href }) => href),
     ...(siteConfig.url
       ? { url: siteConfig.url, image: `${siteConfig.url}/images/og-cover.jpg` }
       : {}),
@@ -47,6 +49,7 @@ export default function Home() {
       <WorksGallery />
       <Team />
       <DiscountCardSection />
+      <Reviews />
       <Contacts />
     </main>
   );

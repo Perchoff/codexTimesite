@@ -1,8 +1,20 @@
 "use client";
 
-import { Phone, Send, X } from "lucide-react";
+import { Phone, X } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { contacts } from "@/data/contacts";
+
+function TelegramIcon() {
+  return (
+    <svg width="26" height="26" viewBox="19 27 80 80" aria-hidden="true">
+      {/* White plane from https://telegram.org/img/t_logo.svg */}
+      <path
+        fill="#fff"
+        d="M28.97 63.32C47.63 55.2 60.07 49.84 66.29 47.25 84.07 39.86 87.76 38.57 90.17 38.53 90.7 38.52 91.88 38.65 92.65 39.27 93.29 39.8 93.47 40.51 93.56 41.01 93.64 41.5 93.75 42.64 93.67 43.53 92.7 53.65 88.53 78.2 86.41 89.54 85.52 94.33 83.75 95.94 82.04 96.1 78.32 96.44 75.5 93.64 71.9 91.28 66.27 87.59 63.09 85.29 57.62 81.69 51.3 77.53 55.4 75.24 59 71.5 59.94 70.52 76.32 55.62 76.63 54.27 76.67 54.1 76.71 53.47 76.33 53.14 75.96 52.81 75.41 52.92 75.01 53.01 74.44 53.14 65.45 59.09 48.01 70.86 45.46 72.61 43.15 73.46 41.07 73.42 38.79 73.37 34.39 72.13 31.12 71.06 27.12 69.76 23.93 69.07 24.21 66.86 24.35 65.71 25.94 64.53 28.97 63.32Z"
+      />
+    </svg>
+  );
+}
 
 function WhatsAppIcon() {
   return (
@@ -22,7 +34,7 @@ function WhatsAppIcon() {
   );
 }
 
-const socialIcons = { Telegram: Send, WhatsApp: WhatsAppIcon };
+const socialIcons = { Telegram: TelegramIcon, WhatsApp: WhatsAppIcon };
 
 export function FloatingContacts() {
   const [open, setOpen] = useState(false);
@@ -87,7 +99,7 @@ export function FloatingContacts() {
             >
               <span className="floating-contact-label">Написать в {label}</span>
               <span className="floating-contact-icon">
-                <Icon size={22} strokeWidth={1.7} aria-hidden="true" />
+                <Icon />
               </span>
             </a>
           );

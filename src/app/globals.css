@@ -861,7 +861,7 @@ svg {
 }
 .contacts {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: minmax(0, 0.88fr) minmax(0, 1.12fr);
   gap: 80px;
   align-items: center;
 }
@@ -921,8 +921,9 @@ svg {
 }
 .map-card {
   --map-inset: 8px;
+  --map-widget-scale: 0.9;
   position: relative;
-  height: 450px;
+  height: 510px;
   border-radius: 8px;
   background: #dfcfba;
   padding: var(--map-inset);
@@ -976,9 +977,13 @@ svg {
 }
 .map-card iframe {
   position: absolute;
-  inset: var(--map-inset);
-  width: calc(100% - var(--map-inset) - var(--map-inset));
-  height: calc(100% - var(--map-inset) - var(--map-inset));
+  inset: var(--map-inset) auto auto var(--map-inset);
+  /* The embedded card has no separate size setting. Scale the desktop widget
+     inside a larger viewport so the map still fills its frame. */
+  width: calc((100% - 2 * var(--map-inset)) / var(--map-widget-scale));
+  height: calc((100% - 2 * var(--map-inset)) / var(--map-widget-scale));
+  transform: scale(var(--map-widget-scale));
+  transform-origin: top left;
   border: 0;
   border-radius: 3px;
 }
@@ -1492,7 +1497,7 @@ svg {
     font-size: 25px;
   }
   .map-card {
-    height: 430px;
+    height: 480px;
   }
 }
 @media (min-width: 768px) and (max-width: 950px) {
@@ -1625,7 +1630,7 @@ svg {
     gap: 12px;
   }
   .map-card {
-    height: 450px;
+    height: 490px;
   }
   .map-brand {
     font-size: 29px;
@@ -2004,7 +2009,8 @@ svg {
   }
   .map-card {
     --map-inset: 6px;
-    height: 350px;
+    --map-widget-scale: 1;
+    height: 390px;
   }
   .map-brand {
     font-size: 32px;

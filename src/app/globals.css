@@ -15,7 +15,7 @@
   --muted: #75685d;
   --bronze: #8b633f;
   --line: #dcd3c7;
-  --header-tone: #ddcbb8;
+  --warm-surface: #e4d4c1;
   --cookie-height: 0px;
   --text-body: 17px;
   --text-secondary: 14px;
@@ -204,8 +204,7 @@ svg {
   position: sticky;
   top: 0;
   z-index: 40;
-  background: color-mix(in srgb, var(--header-tone) 96%, transparent);
-  backdrop-filter: blur(16px);
+  background: var(--warm-surface);
   border-bottom: 1px solid #bda08380;
 }
 .header-inner {
@@ -762,7 +761,7 @@ svg {
   padding: clamp(24px, 3vw, 44px);
   border: 1px solid #cdb69d;
   border-radius: 8px;
-  background: #e4d4c1;
+  background: var(--warm-surface);
 }
 .reviews-copy .reviews-intro {
   color: #625044;
@@ -1695,7 +1694,7 @@ svg {
     right: 0;
     display: flex;
     flex-direction: column;
-    background: var(--header-tone);
+    background: var(--warm-surface);
     padding: 10px 20px 20px;
     border-bottom: 1px solid var(--line);
     box-shadow: 0 15px 20px #332a240d;

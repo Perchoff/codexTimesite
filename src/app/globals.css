@@ -626,7 +626,7 @@ svg {
   animation: panel-in 0.3s ease both;
 }
 .service-intro {
-  background: var(--paper);
+  background: var(--warm-surface);
   border-radius: 3px;
   padding: 30px 28px;
   align-self: start;

@@ -62,7 +62,7 @@ export function Team() {
                 <p className="team-intro">
                   Эксперт по маникюру и наращиванию ногтей.
                 </p>
-                <ul>
+                <ul role="list">
                   {master.achievements.map((achievement) => (
                     <li key={achievement}>{achievement}</li>
                   ))}

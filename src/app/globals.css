@@ -656,6 +656,9 @@ svg {
   gap: 0 30px;
   align-content: start;
 }
+.service-catalog-mobile {
+  display: none;
+}
 .service-list li {
   display: flex;
   align-items: baseline;
@@ -1141,6 +1144,9 @@ svg {
 }
 .floating-contact-links a:focus-visible {
   outline-offset: 2px;
+}
+.floating-contact-links .floating-contact-phone {
+  justify-self: end;
 }
 .floating-contact-label {
   padding: 6px 12px;
@@ -1768,8 +1774,9 @@ svg {
     aspect-ratio: 0.96;
   }
   .art-topline {
-    top: 44px;
-    font-size: 12px;
+    top: clamp(24px, 7.5vw, 32px);
+    font-size: clamp(9px, 3vw, 12px);
+    white-space: nowrap;
   }
   .logo-plinth {
     width: 75%;
@@ -1911,6 +1918,36 @@ svg {
   .service-list {
     grid-template-columns: 1fr;
   }
+  .service-catalog-desktop {
+    display: none;
+  }
+  .service-catalog-mobile {
+    display: block;
+  }
+  .service-disclosure summary {
+    justify-content: space-between;
+    width: 100%;
+    margin-top: 14px;
+    cursor: pointer;
+    list-style: none;
+  }
+  .service-disclosure summary::-webkit-details-marker {
+    display: none;
+  }
+  .service-disclosure summary:focus-visible {
+    outline: 2px solid var(--bronze);
+    outline-offset: 3px;
+  }
+  .service-disclosure summary:hover svg {
+    transform: none;
+  }
+  .service-disclosure[open] summary svg {
+    transform: rotate(180deg);
+  }
+  .service-disclosure:not([open]) .service-hide,
+  .service-disclosure[open] .service-show {
+    display: none;
+  }
   .service-additions {
     grid-column: 1;
     margin-top: 5px;
@@ -1977,8 +2014,12 @@ svg {
     grid-template-columns: 1fr;
     gap: 35px;
   }
+  .contacts-copy {
+    text-align: center;
+  }
   .contacts h2 {
     max-width: 300px;
+    margin-inline: auto;
   }
   .contacts-intro {
     font-size: var(--text-body);
@@ -1986,7 +2027,12 @@ svg {
   }
   .contact-row {
     margin-top: 25px;
-    gap: 17px;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+  }
+  .contact-row > svg {
+    margin-top: 0;
   }
   .contact-row p {
     font-size: var(--text-body);
@@ -1998,6 +2044,7 @@ svg {
     grid-template-columns: 1fr;
     gap: 12px;
     margin-top: 28px;
+    margin-inline: auto;
     width: min(100%, 340px);
   }
   .contact-actions .button {
@@ -2144,6 +2191,12 @@ svg {
   }
 }
 @media (max-width: 374px) {
+  .hero h1 {
+    font-size: clamp(60px, 21vw, 75px);
+  }
+  .art-topline {
+    letter-spacing: 0.18em;
+  }
   .hero-actions {
     gap: 18px;
   }
@@ -2156,6 +2209,13 @@ svg {
   }
   .service-tabs {
     gap: 8px;
+  }
+  .advantages-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .advantages-grid h3 {
+    font-size: 22px;
+    overflow-wrap: anywhere;
   }
   .brand-wordmark {
     font-size: 22px;

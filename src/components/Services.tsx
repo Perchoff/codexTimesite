@@ -1,18 +1,44 @@
 "use client";
 
 import { useRef, useState } from "react";
-import { ArrowUpRight, PaintbrushVertical } from "lucide-react";
-import { serviceCategories } from "@/data/services";
+import { ArrowUpRight, ChevronDown, PaintbrushVertical } from "lucide-react";
+import { serviceCategories, type Service } from "@/data/services";
 import { ManicureIcon, PedicureIcon } from "./ServiceIcons";
 import { NailOrnament } from "./NailOrnament";
 
 const categoryIcons = [ManicureIcon, PaintbrushVertical, PedicureIcon];
+
+function ServiceList({
+  services,
+  start = 1,
+}: {
+  services: Service[];
+  start?: number;
+}) {
+  return (
+    <ul className="service-list" role="list">
+      {services.map((service, index) => (
+        <li key={service.name}>
+          <span className="service-number">
+            {String(start + index).padStart(2, "0")}
+          </span>
+          <div>
+            <span>{service.name}</span>
+            {service.detail && <p>{service.detail}</p>}
+          </div>
+        </li>
+      ))}
+    </ul>
+  );
+}
 
 export function Services() {
   const [active, setActive] = useState(0);
   const tabs = useRef<(HTMLButtonElement | null)[]>([]);
   const category = serviceCategories[active];
   const CategoryIcon = categoryIcons[active];
+  const featured = category.services.filter((service) => service.featured);
+  const remaining = category.services.filter((service) => !service.featured);
   return (
     <section
       id="services"
@@ -84,19 +110,26 @@ export function Services() {
             Записаться <ArrowUpRight size={16} />
           </a>
         </div>
-        <ul className="service-list">
-          {category.services.map((service, index) => (
-            <li key={service.name}>
-              <span className="service-number">
-                {String(index + 1).padStart(2, "0")}
-              </span>
-              <div>
-                <span>{service.name}</span>
-                {service.detail && <p>{service.detail}</p>}
-              </div>
-            </li>
-          ))}
-        </ul>
+        <div className="service-catalog">
+          <div className="service-catalog-desktop">
+            <ServiceList services={category.services} />
+          </div>
+          <div className="service-catalog-mobile">
+            <ServiceList services={featured} />
+            {remaining.length > 0 && (
+              <details className="service-disclosure">
+                <summary className="text-link">
+                  <span className="service-show">
+                    Показать остальные услуги
+                  </span>
+                  <span className="service-hide">Свернуть список услуг</span>
+                  <ChevronDown size={17} aria-hidden="true" />
+                </summary>
+                <ServiceList services={remaining} start={featured.length + 1} />
+              </details>
+            )}
+          </div>
+        </div>
         {category.note && <p className="service-additions">{category.note}</p>}
       </div>
       <div className="services-note">

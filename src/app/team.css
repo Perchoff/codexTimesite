@@ -97,5 +97,20 @@
   }
   .team-info ul {
     margin-block: 18px 22px;
+    padding-left: 0;
+    list-style: none;
+  }
+  .team-info li {
+    position: relative;
+    padding-left: 22px;
+  }
+  .team-info li::before {
+    content: "✧";
+    content: "✧" / "";
+    position: absolute;
+    left: 0;
+    color: var(--bronze);
+    font-size: 16px;
+    line-height: 1.5;
   }
 }

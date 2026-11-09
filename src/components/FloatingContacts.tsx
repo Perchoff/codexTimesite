@@ -104,8 +104,11 @@ export function FloatingContacts() {
             </a>
           );
         })}
-        <a href={contacts.phoneHref}>
-          <span className="floating-contact-label">Позвонить</span>
+        <a
+          className="floating-contact-phone"
+          href={contacts.phoneHref}
+          aria-label="Позвонить"
+        >
           <span className="floating-contact-icon">
             <Phone size={21} strokeWidth={1.7} aria-hidden="true" />
           </span>

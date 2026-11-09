@@ -1,9 +1,11 @@
 import Image from "next/image";
 import { ArrowUpRight } from "lucide-react";
+import { NailOrnament } from "./NailOrnament";
 
 export function About() {
   return (
-    <section id="about" className="about section-pad">
+    <section id="about" className="about section-pad ornamented">
+      <NailOrnament motif="polish" corner="top-right" />
       <div className="container about-grid">
         <figure className="about-visual">
           <div className="about-frame">

@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { ArrowUpRight } from "lucide-react";
+import { NailOrnament } from "./NailOrnament";
 
 const masters = [
   {
@@ -27,9 +28,10 @@ export function Team() {
   return (
     <section
       id="team"
-      className="team section-pad"
+      className="team section-pad ornamented"
       aria-labelledby="team-title"
     >
+      <NailOrnament motif="file" corner="top-right" />
       <div className="container">
         <div className="section-heading">
           <div>

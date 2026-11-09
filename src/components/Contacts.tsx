@@ -1,10 +1,15 @@
-import { ArrowUpRight, MapPin, MessageCircle, Phone } from "lucide-react";
+import { ArrowUpRight, MapPin, Phone } from "lucide-react";
 import { contacts } from "@/data/contacts";
 import { MapSection } from "./MapSection";
+import { NailOrnament } from "./NailOrnament";
 
 export function Contacts() {
   return (
-    <section id="contacts" className="contacts section-pad container">
+    <section
+      id="contacts"
+      className="contacts section-pad container ornamented"
+    >
+      <NailOrnament motif="brush" corner="top-right" />
       <div className="contacts-copy">
         <p className="eyebrow">ДО ВСТРЕЧИ НА ТАГАНСКОЙ</p>
         <h2>
@@ -32,25 +37,6 @@ export function Contacts() {
             <a className="contact-phone" href={contacts.phoneHref}>
               {contacts.phone}
             </a>
-          </div>
-        </div>
-        <div className="contact-row">
-          <MessageCircle size={20} strokeWidth={1.4} aria-hidden="true" />
-          <div>
-            <span className="contact-label">НАПИСАТЬ В СТУДИЮ</span>
-            <nav className="contact-socials" aria-label="Мессенджеры студии">
-              {contacts.socials.map(({ label, href }) => (
-                <a
-                  key={label}
-                  className="text-link"
-                  href={href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  {label} <ArrowUpRight size={16} aria-hidden="true" />
-                </a>
-              ))}
-            </nav>
           </div>
         </div>
         <div className="contact-actions">

@@ -1,10 +1,11 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, type PointerEvent } from "react";
 import { ArrowLeft, ArrowRight, X, Expand } from "lucide-react";
 import { works } from "@/data/works";
 import "@/app/works-gallery.css";
+import { NailOrnament } from "./NailOrnament";
 
 const categories = [
   "Все работы",
@@ -22,6 +23,8 @@ export function WorksGallery() {
   const [viewerOpen, setViewerOpen] = useState(false);
   const [atEnd, setAtEnd] = useState(false);
   const track = useRef<HTMLDivElement>(null);
+  const drag = useRef<{ id: number; x: number; left: number } | null>(null);
+  const dragged = useRef(false);
   const dialog = useRef<HTMLDialogElement>(null);
   const previousOverflow = useRef("");
   const filteredPhotos =
@@ -59,6 +62,34 @@ export function WorksGallery() {
           : "smooth",
       });
   }
+  function startDrag(event: PointerEvent<HTMLDivElement>) {
+    dragged.current = false;
+    if (event.pointerType !== "mouse" || event.button !== 0) return;
+    drag.current = {
+      id: event.pointerId,
+      x: event.clientX,
+      left: event.currentTarget.scrollLeft,
+    };
+  }
+  function dragTrack(event: PointerEvent<HTMLDivElement>) {
+    const gesture = drag.current;
+    const element = event.currentTarget;
+    if (!gesture || gesture.id !== event.pointerId) return;
+    const distance = event.clientX - gesture.x;
+    if (!dragged.current) {
+      if (Math.abs(distance) < 7 || element.scrollWidth <= element.clientWidth)
+        return;
+      dragged.current = true;
+      element.setPointerCapture(event.pointerId);
+      element.dataset.dragging = "true";
+    }
+    element.scrollLeft = gesture.left - distance;
+  }
+  function finishDrag(event: PointerEvent<HTMLDivElement>) {
+    if (drag.current?.id !== event.pointerId) return;
+    drag.current = null;
+    delete event.currentTarget.dataset.dragging;
+  }
   function close() {
     dialog.current?.close();
   }
@@ -69,9 +100,10 @@ export function WorksGallery() {
   return (
     <section
       id="gallery"
-      className="container section-pad works-section"
+      className="container section-pad works-section ornamented"
       aria-labelledby="works-heading"
     >
+      <NailOrnament motif="tips" corner="top-left" />
       <div className="works-heading">
         <div>
           <p className="eyebrow">КРАСОТА В ДЕТАЛЯХ</p>
@@ -109,6 +141,20 @@ export function WorksGallery() {
         ref={track}
         tabIndex={0}
         aria-label="Фотографии работ. Листайте горизонтально"
+        onPointerDown={startDrag}
+        onPointerMove={dragTrack}
+        onPointerUp={finishDrag}
+        onPointerCancel={finishDrag}
+        onLostPointerCapture={finishDrag}
+        onPointerLeave={(event) => {
+          if (!dragged.current) finishDrag(event);
+        }}
+        onClickCapture={(event) => {
+          if (dragged.current && event.detail > 0) {
+            event.preventDefault();
+            event.stopPropagation();
+          }
+        }}
         onKeyDown={(event) => {
           if (event.target !== event.currentTarget) return;
           if (event.key === "ArrowRight" || event.key === "ArrowLeft") {
@@ -143,6 +189,7 @@ export function WorksGallery() {
                 src={item.src}
                 alt={item.alt}
                 fill
+                draggable={false}
                 sizes="(max-width: 767px) 80vw, (max-width: 1100px) 44vw, 390px"
               />
               <span className="works-expand">
@@ -173,7 +220,10 @@ export function WorksGallery() {
         </div>
       )}
       <div className="works-bottom">
-        <p>Листайте и нажимайте на фото, чтобы рассмотреть детали</p>
+        <p>
+          Листайте свайпом или перетаскивайте мышью. Нажмите на фото, чтобы
+          увеличить.
+        </p>
         <div className="works-arrows">
           <button
             type="button"

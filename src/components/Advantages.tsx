@@ -1,4 +1,5 @@
 import { Clock3, Flower2, Hand, Sparkles } from "lucide-react";
+import { NailOrnament } from "./NailOrnament";
 
 const items = [
   {
@@ -25,9 +26,10 @@ const items = [
 export function Advantages() {
   return (
     <section
-      className="advantages section-pad"
+      className="advantages section-pad ornamented"
       aria-labelledby="advantages-title"
     >
+      <NailOrnament motif="petals" corner="top-right" />
       <div className="container">
         <p className="eyebrow">ТО, ЧТО ИМЕЕТ ЗНАЧЕНИЕ</p>
         <h2 id="advantages-title">

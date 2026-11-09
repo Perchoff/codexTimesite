@@ -1,5 +1,6 @@
 import { ArrowUpRight } from "lucide-react";
 import { contacts } from "@/data/contacts";
+import { NailOrnament } from "./NailOrnament";
 
 export function Reviews() {
   return (
@@ -9,7 +10,8 @@ export function Reviews() {
       aria-labelledby="reviews-title"
     >
       <div className="reviews-grid container">
-        <div>
+        <div className="reviews-copy ornamented">
+          <NailOrnament motif="polish" corner="bottom-right" />
           <p className="eyebrow">ВПЕЧАТЛЕНИЯ ГОСТЕЙ</p>
           <h2 id="reviews-title">
             Отзывы <em>о студии</em>

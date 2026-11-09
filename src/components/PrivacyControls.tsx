@@ -2,8 +2,8 @@
 
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
-import { ArrowUp, Phone } from "lucide-react";
-import { contacts } from "@/data/contacts";
+import { ArrowUp } from "lucide-react";
+import { FloatingContacts } from "./FloatingContacts";
 
 type Consent = "all" | "necessary";
 export const CONSENT_KEY = "vm_cookie_consent";
@@ -131,13 +131,7 @@ export function PrivacyControls() {
   }
   return (
     <>
-      <a
-        href={contacts.phoneHref}
-        className={`floating-action floating-call${backToTopOverFooter ? " is-over-footer" : ""}`}
-        aria-label="Позвонить в студию Время маникюра"
-      >
-        <Phone size={22} strokeWidth={1.7} />
-      </a>
+      <FloatingContacts />
       {showBackToTop && (
         <a
           ref={backToTopRef}

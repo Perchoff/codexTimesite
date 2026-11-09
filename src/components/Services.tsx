@@ -4,6 +4,7 @@ import { useRef, useState } from "react";
 import { ArrowUpRight, PaintbrushVertical } from "lucide-react";
 import { serviceCategories } from "@/data/services";
 import { ManicureIcon, PedicureIcon } from "./ServiceIcons";
+import { NailOrnament } from "./NailOrnament";
 
 const categoryIcons = [ManicureIcon, PaintbrushVertical, PedicureIcon];
 
@@ -15,9 +16,10 @@ export function Services() {
   return (
     <section
       id="services"
-      className="services section-pad container"
+      className="services section-pad container ornamented"
       aria-labelledby="services-title"
     >
+      <NailOrnament motif="brush" corner="top-right" />
       <div className="section-heading">
         <div>
           <p className="eyebrow">ТВОЙ РИТУАЛ КРАСОТЫ</p>

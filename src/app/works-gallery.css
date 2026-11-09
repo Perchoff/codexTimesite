@@ -44,6 +44,22 @@
   scrollbar-color: var(--bronze) var(--paper);
   padding: 5px 0 18px;
 }
+.works-track[data-dragging="true"] {
+  scroll-snap-type: none;
+}
+@media (any-pointer: fine) {
+  .works-track {
+    cursor: grab;
+    user-select: none;
+  }
+  .works-track[data-dragging="true"],
+  .works-track[data-dragging="true"] .works-photo {
+    cursor: grabbing;
+  }
+  .works-track[data-dragging="true"] .works-photo img {
+    transform: none;
+  }
+}
 .works-card {
   flex: 0 0 calc((100% - 48px) / 3);
   min-width: 0;

@@ -15,6 +15,7 @@
   --muted: #75685d;
   --bronze: #8b633f;
   --line: #dcd3c7;
+  --header-tone: #ddcbb8;
   --cookie-height: 0px;
   --text-body: 17px;
   --text-secondary: 14px;
@@ -203,9 +204,9 @@ svg {
   position: sticky;
   top: 0;
   z-index: 40;
-  background: #e9e1d6f5;
+  background: color-mix(in srgb, var(--header-tone) 96%, transparent);
   backdrop-filter: blur(16px);
-  border-bottom: 1px solid #dcd3c780;
+  border-bottom: 1px solid #bda08380;
 }
 .header-inner {
   height: 94px;
@@ -752,7 +753,19 @@ svg {
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(300px, 1.25fr);
   gap: clamp(24px, 5vw, 80px);
-  align-items: start;
+}
+.reviews-copy {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  padding: clamp(24px, 3vw, 44px);
+  border: 1px solid #cdb69d;
+  border-radius: 8px;
+  background: #e4d4c1;
+}
+.reviews-copy .reviews-intro {
+  color: #625044;
 }
 .reviews-intro {
   max-width: 34ch;
@@ -763,7 +776,7 @@ svg {
   display: block;
   width: 100%;
   max-width: 760px;
-  height: 800px;
+  height: 500px;
   border: 1px solid var(--line);
   border-radius: 8px;
   background: #fff;
@@ -777,6 +790,74 @@ svg {
   .reviews-frame {
     width: max(300px, 100%);
     justify-self: center;
+  }
+}
+.ornamented {
+  position: relative;
+  isolation: isolate;
+}
+.nail-ornament {
+  position: absolute;
+  z-index: -1;
+  width: clamp(82px, 12vw, 160px);
+  height: auto;
+  pointer-events: none;
+  color: #a5815b;
+  opacity: 0.48;
+  stroke-width: 0.9;
+}
+.nail-ornament--top-right {
+  top: 4px;
+  right: max(12px, 2%);
+  transform: rotate(14deg);
+}
+.nail-ornament--top-left {
+  top: 0;
+  left: 0;
+  width: clamp(74px, 8vw, 112px);
+  transform: rotate(-10deg);
+}
+.nail-ornament--bottom-right {
+  bottom: 10px;
+  right: 12px;
+  transform: rotate(12deg);
+}
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .nail-ornament {
+      view-timeline-name: --ornament-view;
+    }
+    .nail-ornament path {
+      stroke-dasharray: 1;
+      animation: trace-nail-ornament linear both;
+      animation-timeline: --ornament-view;
+      animation-range: entry 0% cover 32%;
+    }
+    .nail-ornament path + path {
+      animation-range: entry 28% cover 38%;
+    }
+  }
+}
+@keyframes trace-nail-ornament {
+  from {
+    stroke-dashoffset: 1;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+@media (max-width: 767px) {
+  .nail-ornament {
+    width: 82px;
+    opacity: 0.32;
+  }
+  .nail-ornament--top-left {
+    left: auto;
+    right: max(12px, 2%);
+  }
+  .nail-ornament--bottom-right {
+    bottom: 5px;
+    right: 6px;
   }
 }
 .contacts {
@@ -824,11 +905,6 @@ svg {
   font-family: "Cormorant Garamond Variable", Georgia, serif;
   font-size: 32px;
   line-height: 1.15;
-}
-.contact-socials {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
 }
 .contact-actions {
   display: grid;
@@ -1002,14 +1078,26 @@ svg {
   text-decoration: underline;
   text-underline-offset: 4px;
 }
-.floating-action {
+.floating-contacts,
+.floating-top {
+  --floating-gap: 24px;
+  --floating-bottom: calc(
+    var(--floating-gap) + env(safe-area-inset-bottom, 0px) +
+      var(--cookie-height)
+  );
   position: fixed;
   z-index: 45;
-  bottom: calc(24px + env(safe-area-inset-bottom, 0px) + var(--cookie-height));
+  bottom: var(--floating-bottom);
+}
+.floating-contacts {
+  --floating-size: 56px;
+  right: 25px;
+}
+.floating-action {
   border: 0;
   padding: 0;
-  width: 56px;
-  height: 56px;
+  width: var(--floating-size);
+  height: var(--floating-size);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1024,7 +1112,79 @@ svg {
     border-color 0.2s;
 }
 .floating-call {
-  right: 25px;
+  position: relative;
+}
+.floating-contact-links:not([hidden]) {
+  position: absolute;
+  right: -5px;
+  bottom: calc(100% + 5px);
+  width: max-content;
+  max-width: calc(100vw - 36px);
+  max-height: calc(
+    100dvh - var(--floating-bottom) - var(--floating-size) - 10px
+  );
+  overflow: auto;
+  padding: 5px;
+  display: grid;
+  gap: 8px;
+}
+.floating-contact-links a {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 10px;
+  border-radius: 6px;
+}
+.floating-contact-links a:focus-visible {
+  outline-offset: 2px;
+}
+.floating-contact-label {
+  padding: 6px 12px;
+  border: 1px solid #c4aa8c;
+  border-radius: 6px;
+  background: var(--background);
+  color: var(--ink);
+  font-size: var(--text-secondary);
+  font-weight: 600;
+  box-shadow: 0 3px 10px #332a2418;
+}
+.floating-contact-icon {
+  display: grid;
+  flex: 0 0 46px;
+  width: 46px;
+  height: 46px;
+  place-items: center;
+  margin-inline: calc((var(--floating-size) - 46px) / 2);
+  border-radius: 50%;
+  background: var(--contact-icon-bg, #765336);
+  color: #fffaf4;
+  box-shadow: 0 3px 10px #332a2430;
+}
+.floating-contact-telegram {
+  --contact-icon-bg: #097daf;
+  --contact-icon-active: #08628d;
+}
+.floating-contact-whatsapp {
+  --contact-icon-bg: #12824d;
+  --contact-icon-active: #0c633b;
+}
+.floating-contact-links a:is(:hover, :focus-visible) .floating-contact-label {
+  background: var(--paper);
+  border-color: var(--bronze);
+}
+.floating-contact-links a:is(:hover, :focus-visible) .floating-contact-icon {
+  background: var(--contact-icon-active, #4b3426);
+}
+@media (max-width: 767px) {
+  .floating-contact-links
+    :is(.floating-contact-telegram, .floating-contact-whatsapp) {
+    justify-self: end;
+  }
+  .floating-contact-links
+    :is(.floating-contact-telegram, .floating-contact-whatsapp)
+    .floating-contact-label {
+    display: none;
+  }
 }
 .floating-top {
   left: 25px;
@@ -1035,7 +1195,7 @@ svg {
   color: var(--bronze);
   box-shadow: 0 3px 12px #332a2418;
 }
-.floating-call::after {
+.floating-call[aria-expanded="false"]::after {
   content: "";
   position: absolute;
   inset: -1px;
@@ -1535,7 +1695,7 @@ svg {
     right: 0;
     display: flex;
     flex-direction: column;
-    background: #e9e1d6;
+    background: var(--header-tone);
     padding: 10px 20px 20px;
     border-bottom: 1px solid var(--line);
     box-shadow: 0 15px 20px #332a240d;
@@ -1896,20 +2056,16 @@ svg {
   .footer-link {
     align-self: flex-start;
   }
-  .floating-call {
+  .floating-contacts,
+  .floating-top {
+    --floating-gap: 18px;
+  }
+  .floating-contacts {
+    --floating-size: 54px;
     right: 18px;
   }
   .floating-top {
     left: 18px;
-  }
-  .floating-action {
-    bottom: calc(
-      18px + env(safe-area-inset-bottom, 0px) + var(--cookie-height)
-    );
-    width: 54px;
-    height: 54px;
-  }
-  .floating-top {
     width: 44px;
     height: 44px;
   }
@@ -2008,7 +2164,7 @@ svg {
     animation: none;
     filter: none;
   }
-  .floating-call::after {
+  .floating-call[aria-expanded="false"]::after {
     animation: none;
     opacity: 0;
   }

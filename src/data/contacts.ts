@@ -14,6 +14,6 @@ export const contacts = {
   socials: [
     { label: "Telegram", href: "https://t.me/+79269942552" },
     { label: "WhatsApp", href: "https://wa.me/79269942552" },
-  ],
+  ] as const,
   bookingUrl: "#contacts",
 };

@@ -917,6 +917,13 @@ svg {
 }
 .contact-online-booking {
   grid-column: 1 / -1;
+  background: var(--warm-surface);
+  border-color: #cdb69d;
+  color: var(--ink);
+}
+.contact-online-booking:is(:hover, :focus-visible) {
+  background: #d9c3aa;
+  border-color: var(--bronze);
 }
 .contact-actions > a {
   width: 100%;

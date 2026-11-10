@@ -23,7 +23,15 @@ export function WorksGallery() {
   const [viewerOpen, setViewerOpen] = useState(false);
   const [atEnd, setAtEnd] = useState(false);
   const track = useRef<HTMLDivElement>(null);
-  const drag = useRef<{ id: number; x: number; left: number } | null>(null);
+  const drag = useRef<{
+    id: number;
+    x: number;
+    left: number;
+    lastX: number;
+    lastTime: number;
+    velocity: number;
+  } | null>(null);
+  const settleFrame = useRef(0);
   const dragged = useRef(false);
   const dialog = useRef<HTMLDialogElement>(null);
   const previousOverflow = useRef("");
@@ -44,6 +52,8 @@ export function WorksGallery() {
     observer.observe(element);
     element.addEventListener("scroll", update);
     return () => {
+      cancelAnimationFrame(settleFrame.current);
+      delete element.dataset.settling;
       observer.disconnect();
       element.removeEventListener("scroll", update);
     };
@@ -52,7 +62,8 @@ export function WorksGallery() {
   function move(direction: number) {
     const next = Math.max(0, Math.min(photos.length - 1, active + direction));
     const card = track.current?.children[next] as HTMLElement | undefined;
-    if (track.current && card)
+    if (track.current && card) {
+      stopSettling(track.current);
       track.current.scrollTo({
         left:
           card.offsetLeft -
@@ -61,14 +72,60 @@ export function WorksGallery() {
           ? "instant"
           : "smooth",
       });
+    }
+  }
+  function stopSettling(element: HTMLDivElement) {
+    cancelAnimationFrame(settleFrame.current);
+    delete element.dataset.settling;
+  }
+  function settle(element: HTMLDivElement, velocity: number) {
+    const first = element.children[0] as HTMLElement | undefined;
+    const second = element.children[1] as HTMLElement | undefined;
+    if (!first || !second) return;
+
+    const step = second.offsetLeft - first.offsetLeft;
+    if (step <= 0) return;
+    const from = element.scrollLeft;
+    const max = element.scrollWidth - element.clientWidth;
+    const momentum = Math.max(
+      -step * 0.55,
+      Math.min(step * 0.55, velocity * 140),
+    );
+    const projected = Math.max(0, Math.min(max, from + momentum));
+    const snapped = Math.min(max, Math.round(projected / step) * step);
+    const to = max - projected < Math.abs(snapped - projected) ? max : snapped;
+
+    if (
+      Math.abs(to - from) < 1 ||
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches
+    ) {
+      element.scrollLeft = to;
+      delete element.dataset.settling;
+      return;
+    }
+
+    element.dataset.settling = "true";
+    const duration = Math.min(420, 210 + Math.abs(to - from) * 0.35);
+    const started = performance.now();
+    function tick(now: number) {
+      const progress = Math.min(1, (now - started) / duration);
+      element.scrollLeft = from + (to - from) * (1 - (1 - progress) ** 3);
+      if (progress < 1) settleFrame.current = requestAnimationFrame(tick);
+      else delete element.dataset.settling;
+    }
+    settleFrame.current = requestAnimationFrame(tick);
   }
   function startDrag(event: PointerEvent<HTMLDivElement>) {
     dragged.current = false;
     if (event.pointerType !== "mouse" || event.button !== 0) return;
+    cancelAnimationFrame(settleFrame.current);
     drag.current = {
       id: event.pointerId,
       x: event.clientX,
       left: event.currentTarget.scrollLeft,
+      lastX: event.clientX,
+      lastTime: event.timeStamp,
+      velocity: 0,
     };
   }
   function dragTrack(event: PointerEvent<HTMLDivElement>) {
@@ -84,11 +141,27 @@ export function WorksGallery() {
       element.dataset.dragging = "true";
     }
     element.scrollLeft = gesture.left - distance;
+    const elapsed = event.timeStamp - gesture.lastTime;
+    if (elapsed > 0) {
+      gesture.velocity = (gesture.lastX - event.clientX) / elapsed;
+      gesture.lastX = event.clientX;
+      gesture.lastTime = event.timeStamp;
+    }
   }
   function finishDrag(event: PointerEvent<HTMLDivElement>) {
-    if (drag.current?.id !== event.pointerId) return;
+    const gesture = drag.current;
+    if (gesture?.id !== event.pointerId) return;
+    const element = event.currentTarget;
     drag.current = null;
-    delete event.currentTarget.dataset.dragging;
+    const wasSettling = element.dataset.settling === "true";
+    if (dragged.current || wasSettling) {
+      const velocity =
+        event.type === "pointerup" && event.timeStamp - gesture.lastTime < 90
+          ? gesture.velocity
+          : 0;
+      settle(element, velocity);
+    }
+    delete element.dataset.dragging;
   }
   function close() {
     dialog.current?.close();
@@ -128,7 +201,10 @@ export function WorksGallery() {
               setExpanded(false);
               setActive(0);
               setSelected(0);
-              if (track.current) track.current.scrollLeft = 0;
+              if (track.current) {
+                stopSettling(track.current);
+                track.current.scrollLeft = 0;
+              }
             }}
           >
             {item}
@@ -145,6 +221,7 @@ export function WorksGallery() {
         onPointerMove={dragTrack}
         onPointerUp={finishDrag}
         onPointerCancel={finishDrag}
+        onWheel={(event) => stopSettling(event.currentTarget)}
         onLostPointerCapture={finishDrag}
         onPointerLeave={(event) => {
           if (!dragged.current) finishDrag(event);

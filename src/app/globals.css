@@ -915,6 +915,9 @@ svg {
   margin-top: 34px;
   width: min(100%, 480px);
 }
+.contact-online-booking {
+  grid-column: 1 / -1;
+}
 .contact-actions > a {
   width: 100%;
   min-height: 56px;

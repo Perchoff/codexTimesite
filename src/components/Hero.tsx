@@ -1,6 +1,5 @@
 import { ArrowDown, ArrowUpRight, MapPin, Sparkles } from "lucide-react";
 import { AnimatedLogo } from "./AnimatedLogo";
-import { contacts } from "@/data/contacts";
 
 export function Hero() {
   return (
@@ -20,7 +19,7 @@ export function Hero() {
           принадлежит только тебе.
         </p>
         <div className="hero-actions">
-          <a className="button" href={contacts.bookingUrl}>
+          <a className="button" href="#contacts">
             Записаться <ArrowUpRight size={18} />
           </a>
           <a className="text-link" href="#services">

@@ -40,6 +40,12 @@ export function Contacts() {
           </div>
         </div>
         <div className="contact-actions">
+          <a
+            className="button contact-online-booking"
+            href={contacts.onlineBookingUrl}
+          >
+            Онлайн-запись <ArrowUpRight size={17} aria-hidden="true" />
+          </a>
           <a className="button" href={contacts.phoneHref}>
             Позвонить <Phone size={16} />
           </a>

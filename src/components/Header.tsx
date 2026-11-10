@@ -57,7 +57,7 @@ export function Header() {
         </nav>
         <a
           className="button button-small header-booking"
-          href={contacts.bookingUrl}
+          href={`${process.env.NEXT_PUBLIC_BASE_PATH || ""}/${contacts.bookingUrl}`}
         >
           Записаться <ArrowUpRight size={15} />
         </a>
@@ -88,7 +88,10 @@ export function Header() {
               <ArrowUpRight size={18} />
             </a>
           ))}
-          <a href={contacts.bookingUrl} onClick={() => setOpen(false)}>
+          <a
+            href={`${process.env.NEXT_PUBLIC_BASE_PATH || ""}/${contacts.bookingUrl}`}
+            onClick={() => setOpen(false)}
+          >
             Записаться <ArrowUpRight size={18} />
           </a>
         </nav>

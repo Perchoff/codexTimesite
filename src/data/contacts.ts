@@ -15,5 +15,6 @@ export const contacts = {
     { label: "Telegram", href: "https://t.me/+79269942552" },
     { label: "WhatsApp", href: "https://wa.me/79269942552" },
   ] as const,
-  bookingUrl: "https://b2667243.yclients.ru/",
+  bookingUrl: "#contacts",
+  onlineBookingUrl: "https://b2667243.yclients.ru/",
 };

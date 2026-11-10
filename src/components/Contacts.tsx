@@ -43,6 +43,8 @@ export function Contacts() {
           <a
             className="button contact-online-booking"
             href={contacts.onlineBookingUrl}
+            target="_blank"
+            rel="noopener noreferrer"
           >
             Онлайн-запись <ArrowUpRight size={17} aria-hidden="true" />
           </a>

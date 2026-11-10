@@ -3,6 +3,7 @@
 import { useRef, useState } from "react";
 import { ArrowUpRight, ChevronDown, PaintbrushVertical } from "lucide-react";
 import { serviceCategories, type Service } from "@/data/services";
+import { contacts } from "@/data/contacts";
 import { ManicureIcon, PedicureIcon } from "./ServiceIcons";
 import { NailOrnament } from "./NailOrnament";
 
@@ -106,7 +107,7 @@ export function Services() {
           <CategoryIcon size={39} strokeWidth={1.2} aria-hidden="true" />
           <h3>{category.name}</h3>
           <p>{category.intro}</p>
-          <a href="#contacts" className="text-link">
+          <a href={contacts.bookingUrl} className="text-link">
             Записаться <ArrowUpRight size={16} />
           </a>
         </div>

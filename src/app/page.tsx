@@ -13,7 +13,9 @@ import { contacts } from "@/data/contacts";
 import { siteConfig } from "@/data/siteConfig";
 
 export const metadata: Metadata = {
-  alternates: siteConfig.url ? { canonical: siteConfig.url } : undefined,
+  alternates: siteConfig.indexable
+    ? { canonical: `${siteConfig.url}/` }
+    : undefined,
 };
 export default function Home() {
   const structuredData = {
@@ -25,13 +27,16 @@ export default function Home() {
     address: {
       "@type": "PostalAddress",
       streetAddress: `${contacts.street}, ${contacts.details}`,
-      addressLocality: "Москва",
+      addressLocality: contacts.city,
       addressCountry: "RU",
     },
     hasMap: contacts.mapUrl,
-    sameAs: contacts.socials.map(({ href }) => href),
     ...(siteConfig.url
-      ? { url: siteConfig.url, image: `${siteConfig.url}/images/og-cover.jpg` }
+      ? {
+          "@id": `${siteConfig.url}/#studio`,
+          url: `${siteConfig.url}/`,
+          image: `${siteConfig.url}/images/og-cover.jpg`,
+        }
       : {}),
   };
   return (

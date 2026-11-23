@@ -5,7 +5,7 @@ import { NailOrnament } from "./NailOrnament";
 const masters = [
   {
     name: "Ирина Коченкова",
-    image: "/images/team/irina-kochenkova.webp",
+    image: "/images/team/irina-kochenkova-v3.webp",
     achievements: [
       "Эксперт по наращиванию ногтей на верхние формы.",
       "Чемпион в номинации «Наращивание ногтей верхними формами», 2022 год.",
@@ -15,7 +15,7 @@ const masters = [
   },
   {
     name: "Наталья Храпова",
-    image: "/images/team/natalya-khrapova.webp",
+    image: "/images/team/natalya-khrapova-v3.webp",
     achievements: [
       "Инструктор по маникюру и наращиванию ногтей.",
       "Опыт работы с ногтями любой сложности в маникюре и педикюре.",
@@ -52,7 +52,7 @@ export function Team() {
                   src={master.image}
                   alt={master.name}
                   fill
-                  sizes="(max-width: 767px) 90vw, (max-width: 1200px) 45vw, 580px"
+                  sizes="(max-width: 767px) calc(100vw - 40px), (max-width: 950px) calc(50vw - 48px), (max-width: 1199px) calc(50vw - 56px), (max-width: 1351px) calc(50vw - 76px), (min-width: 1600px) 680px, 600px"
                 />
                 <span className="team-experience">Более 15 лет опыта</span>
               </div>

@@ -267,7 +267,7 @@ export function WorksGallery() {
                 alt={item.alt}
                 fill
                 draggable={false}
-                sizes="(max-width: 767px) 80vw, (max-width: 1100px) 44vw, 390px"
+                sizes="(max-width: 767px) calc(85vw - 34px), (max-width: 950px) calc(50vw - 40px), (max-width: 1100px) calc(50vw - 48px), (max-width: 1199px) calc((100vw - 120px) / 3), (max-width: 1351px) calc((100vw - 160px) / 3), (min-width: 1600px) 451px, 398px"
               />
               <span className="works-expand">
                 <Expand size={18} />
@@ -350,10 +350,11 @@ export function WorksGallery() {
         <div className="works-large">
           {viewerOpen && (
             <Image
-              src={photo.src}
+              src={`${process.env.NEXT_PUBLIC_BASE_PATH || ""}${photo.src.replace("/works/", "/works-full/")}`}
               alt={photo.alt}
               fill
-              sizes="(max-width: 1000px) 90vw, 960px"
+              unoptimized
+              loading="eager"
             />
           )}
         </div>

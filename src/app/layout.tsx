@@ -6,12 +6,11 @@ import "./globals.css";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { PrivacyControls } from "@/components/PrivacyControls";
+import { YandexMetrica } from "@/components/YandexMetrica";
 import { siteConfig } from "@/data/siteConfig";
 
 export const metadata: Metadata = {
-  ...(process.env.STATIC_EXPORT === "1"
-    ? { robots: { index: false, follow: false } }
-    : {}),
+  robots: siteConfig.indexable ? undefined : { index: false, follow: false },
   metadataBase: siteConfig.url ? new URL(siteConfig.url) : undefined,
   title: { default: siteConfig.title, template: "%s | Время маникюра" },
   description: siteConfig.description,
@@ -23,7 +22,7 @@ export const metadata: Metadata = {
     description: siteConfig.description,
     ...(siteConfig.url
       ? {
-          url: siteConfig.url,
+          url: `${siteConfig.url}/`,
           images: [
             {
               url: `${siteConfig.url}/images/og-cover.jpg`,
@@ -35,7 +34,14 @@ export const metadata: Metadata = {
         }
       : {}),
   },
-  twitter: { card: "summary_large_image" },
+  twitter: {
+    card: "summary_large_image",
+    title: siteConfig.title,
+    description: siteConfig.description,
+    images: siteConfig.url
+      ? [`${siteConfig.url}/images/og-cover.jpg`]
+      : undefined,
+  },
   icons: {
     icon: [
       {
@@ -59,6 +65,7 @@ export default function RootLayout({
         {children}
         <Footer />
         <PrivacyControls />
+        <YandexMetrica />
       </body>
     </html>
   );

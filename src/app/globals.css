@@ -979,9 +979,6 @@ svg {
   color: #6f6052;
   margin-top: 5px;
 }
-.map-placeholder > .button {
-  margin-top: 24px;
-}
 .map-hint {
   display: block;
   font-size: var(--text-secondary);
@@ -1378,6 +1375,20 @@ svg {
   font-size: var(--text-body);
   color: #6e6054;
   line-height: 1.9;
+}
+.privacy-content ul {
+  display: grid;
+  gap: 10px;
+  margin: 0 0 14px;
+  padding-left: 22px;
+  color: #6e6054;
+  font-size: var(--text-body);
+  line-height: 1.8;
+}
+.legal-date {
+  color: #8b6b4e !important;
+  font-size: var(--text-secondary) !important;
+  letter-spacing: 0.04em;
 }
 .privacy-content a {
   text-decoration: underline;

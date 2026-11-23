@@ -1,4 +1,11 @@
 import type { NextConfig } from "next";
+import { siteConfig } from "./src/data/siteConfig";
+
+if (process.env.SITE_INDEXABLE === "1" && !siteConfig.url) {
+  throw new Error(
+    "Set NEXT_PUBLIC_SITE_URL to the public HTTPS URL before building for hosting.",
+  );
+}
 
 const nextConfig: NextConfig = {
   poweredByHeader: false,
@@ -10,7 +17,7 @@ const nextConfig: NextConfig = {
         images: {
           loader: "custom" as const,
           loaderFile: "./src/lib/static-image-loader.ts",
-          deviceSizes: [640, 828, 1080, 1600],
+          deviceSizes: [320, 480, 640, 828, 1080, 1600],
           imageSizes: [64, 128, 256, 384],
         },
       }

@@ -13,6 +13,8 @@ const clockFormatter = new Intl.DateTimeFormat("en-GB", {
 
 // Keep SSR and browser output identical across JavaScript engines.
 const coordinate = (value: number) => value.toFixed(3);
+const logoSizes =
+  "(max-width: 469px) calc(75vw - 52.5px), (max-width: 767px) 300px, 450px";
 
 export function AnimatedLogo() {
   const dial = useRef<SVGSVGElement>(null);
@@ -57,7 +59,7 @@ export function AnimatedLogo() {
         width={912}
         height={912}
         preload
-        sizes="(max-width: 767px) 75vw, 450px"
+        sizes={logoSizes}
       />
       {/* Brighten only the existing illuminated rim in the original artwork. */}
       <div className="coin-light" aria-hidden="true">
@@ -67,7 +69,7 @@ export function AnimatedLogo() {
           alt=""
           width={912}
           height={912}
-          sizes="(max-width: 767px) 75vw, 450px"
+          sizes={logoSizes}
         />
       </div>
       <svg

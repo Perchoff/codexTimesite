@@ -56,17 +56,25 @@
   font-size: 15px;
 }
 .team-info ul {
-  padding-left: 19px;
+  list-style: none;
+  padding-left: 0;
   margin: 22px 0 26px;
   font-size: 14px;
   line-height: 1.75;
 }
 .team-info li {
-  padding-left: 4px;
+  position: relative;
+  padding-left: 22px;
   margin-bottom: 9px;
 }
-.team-info li::marker {
+.team-info li::before {
+  content: "✧";
+  content: "✧" / "";
+  position: absolute;
+  left: 0;
   color: var(--bronze);
+  font-size: 16px;
+  line-height: 1.5;
 }
 .team-info .text-link {
   align-self: flex-start;
@@ -97,20 +105,5 @@
   }
   .team-info ul {
     margin-block: 18px 22px;
-    padding-left: 0;
-    list-style: none;
-  }
-  .team-info li {
-    position: relative;
-    padding-left: 22px;
-  }
-  .team-info li::before {
-    content: "✧";
-    content: "✧" / "";
-    position: absolute;
-    left: 0;
-    color: var(--bronze);
-    font-size: 16px;
-    line-height: 1.5;
   }
 }

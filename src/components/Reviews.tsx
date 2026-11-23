@@ -34,6 +34,7 @@ export function Reviews() {
           title="Отзывы о студии «Время маникюра» на Яндекс Картах"
           src={contacts.reviewsWidgetUrl}
           loading="lazy"
+          referrerPolicy="strict-origin-when-cross-origin"
         />
       </div>
     </section>

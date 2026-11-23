@@ -13,6 +13,7 @@ export function Brand({ footer = false }: { footer?: boolean }) {
         alt=""
         width={52}
         height={52}
+        loading={footer ? "lazy" : "eager"}
         className="brand-mark"
       />
       <span className="brand-wordmark">

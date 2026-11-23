@@ -6,7 +6,8 @@ import { ArrowUp } from "lucide-react";
 import { FloatingContacts } from "./FloatingContacts";
 
 type Consent = "all" | "necessary";
-export const CONSENT_KEY = "vm_cookie_consent";
+// Ask again when analytics is enabled for the first time.
+export const CONSENT_KEY = "vm_cookie_consent_v3";
 export function CookieSettingsButton() {
   return (
     <button
@@ -121,7 +122,6 @@ export function PrivacyControls() {
     } catch {
       setStorageFailed(true);
     }
-    // Consumers can subscribe here when real analytics is added. No analytics is installed.
     window.dispatchEvent(
       new CustomEvent("vm:consent-changed", { detail: value }),
     );
@@ -153,10 +153,10 @@ export function PrivacyControls() {
           <div className="cookie-copy">
             <h2>Мы используем cookie-файлы</h2>
             <p id="cookie-description">
-              Мы используем необходимые cookie для работы сайта. С вашего
-              согласия можем использовать дополнительные cookie для аналитики и
-              улучшения сайта. Подробнее — в{" "}
-              <Link href="/privacy">политике конфиденциальности</Link>.
+              Сайт запоминает ваш выбор в браузере. С вашего согласия Яндекс
+              Метрика будет собирать статистику посещений и действий на сайте.
+              Подробнее — в{" "}
+              <Link href="/cookies">уведомлении о cookie и Метрике</Link>.
             </p>
             {storageFailed && (
               <p role="status">

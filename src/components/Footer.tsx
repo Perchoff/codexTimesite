@@ -18,7 +18,9 @@ export function Footer() {
         <div className="footer-bottom">
           <span>© {new Date().getFullYear()} Время маникюра</span>
           <div>
-            <Link href="/privacy">Политика конфиденциальности</Link>
+            <Link href="/privacy">Политика обработки данных</Link>
+            <Link href="/cookies">Cookie и Метрика</Link>
+            <Link href="/booking-consent">Согласие при записи</Link>
             <CookieSettingsButton />
           </div>
           <a href={contacts.phoneHref}>{contacts.phone}</a>

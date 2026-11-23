@@ -1,4 +1,5 @@
 import { ArrowDown, ArrowUpRight, MapPin, Sparkles } from "lucide-react";
+import { contacts } from "@/data/contacts";
 import { AnimatedLogo } from "./AnimatedLogo";
 
 export function Hero() {
@@ -27,8 +28,8 @@ export function Hero() {
           </a>
         </div>
         <a href="#contacts" className="hero-location">
-          <MapPin size={16} strokeWidth={1.5} /> Москва, Таганская улица, 1/2,
-          стр. 2
+          <MapPin size={16} strokeWidth={1.5} />
+          <span>{contacts.address}</span>
         </a>
       </div>
       <div
